@@ -53,14 +53,17 @@ function _notifyEventsDailyByWebhook() {
         return block;
     });
 
-
     // ペイロード
     var payload = {
         "@context": "https://schema.org/extensions",
         "@type": "MessageCard",
         "summary": makeDate(today) + "：今日の予定",
         "title": makeDate(today) + "：今日の予定",
-        "sections": body
+    }
+    if( body.length == 0 ) {
+        payload["text"] = "今日は予定がありません。";
+    } else {
+        payload["section"] = body;
     }
 
     // メソッド
