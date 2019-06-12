@@ -57,7 +57,7 @@ function _notifyEventsDailyByWebhook() {
     var payload = {
         "@context": "https://schema.org/extensions",
         "@type": "MessageCard",
-        "summary": makeDate(today) + "：今日の予定",
+        "summary": makeDate(today) + "：今日の予定は" + body.length + "件です。",
         "title": makeDate(today) + "：今日の予定",
     }
     if( body.length == 0 ) {
