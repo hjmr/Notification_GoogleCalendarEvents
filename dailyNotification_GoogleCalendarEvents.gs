@@ -30,7 +30,7 @@ function _notifyEventsDailyByWebhook() {
 
     // 月日の整形
     function makeDate(Date) {
-        return Date.getYear() + "年" + Date.getMonth() + "月" + Date.getDate() + "日";
+        return Date.getYear() + "年" + (Date.getMonth() + 1) + "月" + Date.getDate() + "日";
     }
 
     // 時間の整形
@@ -63,7 +63,7 @@ function _notifyEventsDailyByWebhook() {
     if( body.length == 0 ) {
         payload["text"] = "今日は予定がありません。";
     } else {
-        payload["section"] = body;
+        payload["sections"] = body;
     }
 
     // メソッド
