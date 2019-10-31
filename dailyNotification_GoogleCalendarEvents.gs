@@ -53,27 +53,25 @@ function _notifyEventsDailyByWebhook() {
         return block;
     });
 
-    // ペイロード
-    var payload = {
-        "@context": "https://schema.org/extensions",
-        "@type": "MessageCard",
-        "summary": makeDate(today) + "：今日の予定は" + body.length + "件です。",
-        "title": makeDate(today) + "：今日の予定",
-    }
-    if( body.length == 0 ) {
-        payload["text"] = "今日は予定がありません。";
-    } else {
+    if( 0 < body.length ) {
+        // ペイロード
+        var payload = {
+            "@context": "https://schema.org/extensions",
+            "@type": "MessageCard",
+            "summary": makeDate(today) + "：今日の予定は" + body.length + "件です。",
+            "title": makeDate(today) + "：今日の予定",
+        }
         payload["sections"] = body;
-    }
 
-    // メソッド
-    var options = {
-        "method": "POST",
-        "payload": JSON.stringify(payload)
-    }
+        // メソッド
+        var options = {
+            "method": "POST",
+            "payload": JSON.stringify(payload)
+        }
 
-    // Webhook URLにポスト
-    const url = '<Incoming Webhook URL>';
-    var response = UrlFetchApp.fetch(url, options);
-    var content = response.getContentText("UTF-8");
+        // Webhook URLにポスト
+        const url = '<Incoming Webhook URL>';
+        var response = UrlFetchApp.fetch(url, options);
+        var content = response.getContentText("UTF-8");
+    }
 }
